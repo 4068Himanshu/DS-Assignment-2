@@ -1,38 +1,46 @@
-class Node:    
-    def __init__(self,data):    
-        self.data = data;    
-        self.previous = None;    
-        self.next = None;    
-            
-class DoublyLinkedList:       
-    def __init__(self):    
-        self.head = None;    
-        self.foot = None;      
-    def addNode(self, data):       
-        newNode = Node(data);     
-        if(self.head == None):    
-            self.head = self.foot = newNode;    
-            self.head.previous = None;       
-            self.foot.next = None;    
-        else:    
-            self.foot.next = newNode;    
-            newNode.previous = self.foot;     
-            self.foot = newNode;    
-            self.foot.next = None;    
-    def display(self):    
-        current = self.head;    
-        if(self.head == None):    
-            print("List is empty");    
-            return;    
-        print("Nodes of doubly linked list: ");    
-        while(current != None):       
-            print(current.data),;    
-            current = current.next;    
-                
-dList = DoublyLinkedList();      
-dList.addNode('rocky');    
-dList.addNode('jacky');    
-dList.addNode('monty');    
-dList.addNode('tonny');    
-dList.addNode('sunny');       
-dList.display(); 
+class Node:
+   def __init__(self, data):
+      self.data = data
+      self.next = None
+      self.prev = None
+        
+class doubly_linked_list:
+
+   def __init__(self):
+      self.head = None
+
+   def push(self, NewVal):
+      NewNode = Node(NewVal)
+      NewNode.next = self.head
+      if self.head is not None:
+         self.head.prev = NewNode
+      self.head = NewNode
+
+   def append(self, NewVal):
+
+      NewNode = Node(NewVal)
+      NewNode.next = None
+      if self.head is None:
+         NewNode.prev = None
+         self.head = NewNode
+         return
+      last = self.head
+      while (last.next is not None):
+         last = last.next
+      last.next = NewNode
+      NewNode.prev = last
+      return
+
+   def listprint(self, node):
+      while (node is not None):
+         print(node.data),
+         last = node
+         node = node.next
+
+dllist = doubly_linked_list()
+dllist.push('a')
+dllist.append('b')
+dllist.push('c')
+dllist.push('d')
+dllist.append('e')
+dllist.listprint(dllist.head)
